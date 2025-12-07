@@ -1,286 +1,252 @@
-# 🧠 Network Intrusion Detection System
+# 🛡️ AI-Powered Intrusion Detection System
+A comprehensive Network Intrusion Detection System that leverages machine learning and deep 
+learning to detect and classify network attacks in real-time. Built on the **CICIDS 2017 
+dataset**, the system implements three detection approaches: binary classification, 
+multiclass attack identification, and anomaly detection for zero-day threats.
+> Real-time network attack detection using machine learning. Detect and classify 14 attack types with 99.9% binary accuracy and 97.5% multiclass accuracy.
 
-This project implements a machine learning-based network intrusion detection system using the CICIDS 2017 dataset. The system performs binary classification to distinguish between benign and malicious network traffic, with plans to extend to multi-class classification and anomaly detection.
-
----
-
-## 📂 Dataset
-
-**Source:** [CICIDS 2017 Dataset](https://www.unb.ca/cic/datasets/ids-2017.html)
-
-For this implementation, we used a sample from `Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv`:
-- **Total samples:** 10,000 (5,000 BENIGN + 5,000 ATTACK)
-- **Split ratio:** 70% Train / 10% Validation / 20% Test
-- **Features:** 77 numerical features after preprocessing
-
-### Dataset Setup
-
-1. Download `GeneratedLabelledFlows.zip` from the official page
-2. Extract and place the `TrafficLabelling/` folder in your project directory
-
-**Project structure:**
-```
-PHISHING ATTACK/
-├── data_preprocess.py           # Data preprocessing pipeline
-├── data_visualizer.py            # Data visualization code
-├── decision_tree_binary.py       # Decision Tree model
-├── random_forest_binary.py       # Random Forest model
-├── svm_binary.py                 # Support Vector Machine model
-├── xgBoost_binary.py            # XGBoost model
-├── requirements.txt
-├── README.md
-├── .gitignore
-├── TrafficLabelling/            # Raw dataset
-│   ├── Friday-WorkingHours-Afternoon-DDos.pcap_ISCX.csv
-│   └── ...
-├── preprocessed_data/           # Processed datasets
-│   ├── feature_names.txt
-│   ├── test_data.csv
-│   ├── train_data.csv
-│   └── val_data.csv
-├── plots/                       # Model visualizations
-│   ├── class_balance.png
-│   ├── decision_tree_results.png
-│   ├── random_forest_results.png
-│   └── svm_results_clean.png
-│   └── xgboost_results.png
-│   └── preprocessing_summary.png
-├── trained_models/              # Saved model files (.pkl)
-│   ├── decision_tree_model.pkl
-│   ├── random_forest_model.pkl
-│   ├── svm_model.pkl
-│   └── xgboost_model.pkl
-└── venv/                        # Virtual environment
-```
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104+-green.svg)](https://fastapi.tiangolo.com/)
+[![React](https://img.shields.io/badge/React-18.3-blue.svg)](https://reactjs.org/)
 
 ---
 
-## ⚙️ Data Preprocessing Pipeline
+## ✨ Features
 
-Our preprocessing workflow applies several techniques to prepare the raw network traffic data for machine learning:
-
-### 1. **Balanced Sampling**
-- Extracted 5,000 samples per class (BENIGN/ATTACK)
-- Ensures balanced representation for binary classification
-- Prevents model bias toward majority class
-
-### 2. **Data Cleaning**
-- Removed non-numeric columns (Flow ID, IP addresses, timestamps)
-- Handled infinite values and missing data
-- Removed duplicate records
-- Final feature set: **77 numerical features**
-
-### 3. **Feature Normalization**
-- Applied **Z-score standardization**: `(x - μ) / σ`
-- Scales all features to have mean ≈ 0 and std ≈ 1
-- Improves model convergence and performance
-
-### 4. **Train-Validation-Test Split**
-- Training: 70% (6,965 samples)
-- Validation: 10% (995 samples)
-- Test: 20% (1,990 samples)
-- Stratified split maintains class balance across all sets
-
-### Preprocessing Results
-
-| Dataset | Samples | BENIGN | ATTACK |
-|---------|---------|--------|--------|
-| Train   | 6,965   | 3,466  | 3,499  |
-| Validation | 995  | 495    | 500    |
-| Test    | 1,990   | 990    | 1,000  |
+- 🔍 **Binary Classification** - BENIGN vs ATTACK (~99.9% accuracy)
+- 🎯 **Multiclass Classification** - 14 specific attack types (~97.5% accuracy)
+- 🚨 **Anomaly Detection** - Zero-day attack detection via autoencoder
+- 📡 **Real-Time API** - FastAPI server for PCAP/CSV processing
+- 🌐 **Modern Frontend** - React/TypeScript web interface
+- ⚡ **Production-Ready** - Optimized inference pipeline
 
 ---
 
-## 📦 Project Files
-
-| File | Description |
-|------|-------------|
-| `data_preprocess.py` | Preprocessing pipeline: sampling, cleaning, normalization, and splitting |
-| `data_visualizer.py` | Data exploration and visualization code |
-| `decision_tree_binary.py` | Decision Tree classifier implementation |
-| `random_forest_binary.py` | Random Forest classifier implementation |
-| `svm_binary.py` | Support Vector Machine classifier implementation |
-| `xgBoost_binary.py` | XGBoost classifier implementation |
-| `preprocessed_data/` | Train/validation/test CSV files and feature names |
-| `plots/` | Performance visualization images for all models |
-| `trained_models/` | Serialized model files (.pkl) for deployment |
-
-We trained and evaluated four supervised learning algorithms for binary classification:
-
-### Model Comparison
-
-| Model | Accuracy | Precision | Recall | F1-Score | ROC-AUC |
-|-------|----------|-----------|--------|----------|---------|
-| **XGBoost** | **99.90%** | **1.0000** | **0.9980** | **0.9990** | **1.0000** |
-| **Random Forest** | 99.75% | 1.0000 | 0.9950 | 0.9975 | 1.0000 |
-| **Decision Tree** | 99.75% | 1.0000 | 0.9950 | 0.9975 | 0.9990 |
-| **SVM (RBF)** | 98.34% | 0.9717 | 0.9960 | 0.9837 | 0.9990 |
-
----
-
-## 📊 Model Results & Visualizations
-
-### 1. Decision Tree
-![Decision Tree Results](plots/decision_tree_results.png)
-
-**Performance:**
-- Accuracy: 99.75%
-- Fast training (0.04s) and prediction speed (386,559 samples/sec)
-- Top features: Forward packet length, Subflow forward bytes
-
-### 2. Random Forest
-![Random Forest Results](plots/random_forest_results.png)
-
-**Performance:**
-- Accuracy: 99.75%
-- Perfect precision (1.0000) with minimal false positives
-- Ensemble of 100 trees provides robust predictions
-- More balanced feature importance distribution
-
-### 3. Support Vector Machine (SVM)
-![SVM Results](plots/svm_results_clean.png)
-
-**Performance:**
-- Accuracy: 98.34%
-- RBF kernel for non-linear separation
-- Uses only 424 support vectors (6.09% of training data)
-- Slightly more false positives (29) compared to tree-based models
-
-### 4. XGBoost ⭐ **Best Performer**
-![XGBoost Results](plots/xgboost_results.png)
-
-**Performance:**
-- **Highest accuracy: 99.90%**
-- Perfect precision (1.0000) with only 2 false negatives
-- Fast training (0.12s) and excellent prediction speed
-- Gradient boosting effectively corrects previous errors
-- Top features: Forward packet length statistics, Subflow bytes
-
----
-
-## 🚀 Getting Started
+## 🚀 Quick Start
 
 ### Prerequisites
-- Python 3.12.3 or higher
-- pip package manager
+
+- Python 3.8+ (3.12.3 recommended)
+- Node.js 18+ (for frontend, optional)
+- CICIDS 2017 dataset (place in `TrafficLabelling/` folder)
 
 ### Installation
 
-1. **Clone the repository**
 ```bash
+# 1. Clone repository
 git clone <repository-url>
-cd Network-IDS
-```
+cd AI_IDS
 
-2. **Create virtual environment**
-```bash
+# 2. Create virtual environment
 python3 -m venv venv
-source venv/bin/activate        # macOS/Linux
+source venv/bin/activate  # macOS/Linux
 # OR
-venv\Scripts\activate           # Windows
-```
+venv\Scripts\activate     # Windows
 
-3. **Install dependencies**
-```bash
+# 3. Install dependencies
 pip install -r requirements.txt
+
+# 4. (Optional) Install frontend dependencies
+cd frontend && npm install && cd ..
 ```
 
-### Usage
+### Dataset Setup
 
-**Step 1: Preprocess the data**
+1. Download `GeneratedLabelledFlows.zip` from [CICIDS 2017](https://www.unb.ca/cic/datasets/ids-2017.html)
+2. Extract and place the `TrafficLabelling/` folder in project root
+
+---
+
+## 📋 Usage
+
+### Step 1: Preprocess Data
+
 ```bash
-python data_preprocess.py
+python final_data_preprocess.py
 ```
-This creates the `preprocessed_data/` folder with train/val/test splits and feature names.
 
-**Step 2: Visualize the data (optional)**
+Creates preprocessed datasets and artifacts in `final_preprocessed_data/`
+
+### Step 2: Train Models
+
 ```bash
-python data_visualizer.py
+# Train all three models
+python final_models/final_xgboost_binary.py
+python final_models/final_xgboost_multi.py
+python final_models/final_autoencoder_xgboost_anomaly.py
 ```
-Generates exploratory data analysis visualizations.
 
-**Step 3: Train individual models**
+Models saved to `final_preprocessed_data/models/`
 
-Train each model separately:
+### Step 3: Start API Server
+
 ```bash
-# Decision Tree
-python decision_tree_binary.py
-
-# Random Forest
-python random_forest_binary.py
-
-# Support Vector Machine
-python svm_binary.py
-
-# XGBoost
-python xgBoost_binary.py
+python api/api_server.py
 ```
 
-Each script will:
-- Load preprocessed data from `preprocessed_data/`
-- Train the model on training data
-- Evaluate on validation and test sets
-- Save the trained model to `trained_models/` as a `.pkl` file
-- Generate visualization plots in `plots/` folder
+Server runs on `http://localhost:8000`  
+API docs: `http://localhost:8000/docs`
 
----
+### Step 4: (Optional) Start Frontend
 
-## 📦 Dependencies
-
-```
-pandas
-numpy
-scikit-learn
-xgboost
-matplotlib
-seaborn
+```bash
+cd frontend
+npm run dev
 ```
 
----
-
-## 🎯 Future Work
-
-We plan to extend this project in the following directions:
-
-### 1. **Multi-Class Classification**
-- Classify specific attack types (DDoS, DoS, Brute Force, etc.)
-- Use the complete CICIDS 2017 dataset with all attack categories
-- Compare model performance on granular threat detection
-
-### 2. **Anomaly Detection**
-- Implement unsupervised learning approaches (Isolation Forest, Autoencoders)
-- Detect novel/zero-day attacks not seen during training
-- Hybrid approach combining supervised and unsupervised methods
-
-### 3. **Scalability**
-- Train on larger datasets (full CICIDS 2017 with 2.8M samples)
-- Implement online/incremental learning for real-time detection
-- Optimize for production deployment
-
-### 4. **Deep Learning**
-- Experiment with neural networks (LSTM, CNN, Transformer-based models)
-- Leverage temporal patterns in network traffic sequences
+Frontend runs on `http://localhost:8080`
 
 ---
 
-## 📈 Key Insights
+## 🔌 API Usage
 
-1. **XGBoost achieves the best performance** with 99.90% accuracy and perfect ROC-AUC
-2. **Tree-based models outperform SVM** on this dataset, likely due to their ability to capture complex feature interactions
-3. **Forward packet length features are critical** for distinguishing attack patterns
-4. **All models show excellent generalization** with minimal overfitting
-5. **The preprocessing pipeline is effective** at creating a clean, balanced dataset
+### Upload PCAP File
+
+```bash
+curl -X POST "http://localhost:8000/predict" \
+     -H "Content-Type: multipart/form-data" \
+     -F "file=@network_traffic.pcap"
+```
+
+### Upload CSV Flows
+
+```bash
+curl -X POST "http://localhost:8000/predict" \
+     -H "Content-Type: multipart/form-data" \
+     -F "file=@flows.csv"
+```
+
+### Response Example
+
+```json
+{
+  "status": "success",
+  "total_flows": 1000,
+  "summary": {
+    "BENIGN": 800,
+    "ATTACK": 150,
+    "ANOMALY": 50
+  },
+  "attack_types": {
+    "DDoS": 50,
+    "PortScan": 100
+  },
+  "download_csv": "live/predictions_1234567890.csv"
+}
+```
 
 ---
 
-## 📝 Notes
+## 🎯 Attack Types Detected
 
-- The dataset is not included in this repository due to its size
-- Each model has its own training script for modular development
-- Trained models are saved as `.pkl` files in `trained_models/` for reuse
-- All visualizations are automatically saved to the `plots/` folder
-- Preprocessing significantly improves model performance
-- Results may vary slightly due to random sampling and model initialization
-- For production use, load models from `trained_models/` using pickle
+Bot • DDoS • DoS GoldenEye • DoS Hulk • DoS Slowhttptest • DoS slowloris • FTP-Patator • Heartbleed • Infiltration • PortScan • SSH-Patator • Web Attack (Brute Force, SQL Injection, XSS)
 
 ---
+
+## 📊 Performance
+
+| Model | Accuracy | Purpose |
+|-------|----------|---------|
+| Binary | ~99.9% | BENIGN vs ATTACK |
+| Multiclass | ~97.5% | 14 attack types |
+| Anomaly | Configurable | Zero-day detection |
+
+---
+
+## 🏗️ Architecture
+
+![System Architecture](image.png)
+
+```
+PCAP/CSV → Flow Extraction → Preprocessing → 
+  ├─ Binary XGBoost (Gatekeeper)
+  ├─ Multiclass XGBoost (Attack ID)
+  └─ Autoencoder (Anomaly Detection)
+→ Predictions CSV
+```
+
+See [CODEBASE_SUMMARY.md](CODEBASE_SUMMARY.md) for detailed architecture.
+
+---
+
+## 📦 Key Dependencies
+
+**Backend:**
+- `xgboost==2.0.3` - Gradient boosting
+- `tensorflow>=2.13.0` - Autoencoder
+- `fastapi>=0.104.0` - API server
+- `scapy` - Packet processing
+
+**Frontend:**
+- React 18.3.1
+- TypeScript 5.8.3
+- Vite 5.4.19
+
+See `requirements.txt` and `frontend/package.json` for complete lists.
+
+---
+
+## 🐛 Troubleshooting
+
+**"Cannot connect to API server"**
+- Ensure backend is running: `python api/api_server.py`
+- Check port 8000 is available
+
+**"CICFlowMeter not found"**
+- Install: `pip install git+https://github.com/hieulw/cicflowmeter.git@master`
+- Ensure Scapy is installed: `pip install scapy`
+
+**Frontend build errors**
+```bash
+cd frontend
+rm -rf node_modules package-lock.json
+npm install
+```
+
+---
+
+## 📚 Documentation
+
+- **Detailed Documentation**: See [CODEBASE_SUMMARY.md](CODEBASE_SUMMARY.md)
+- **Project Report**: See [project_report.html](project_report.html)
+- **API Docs**: `http://localhost:8000/docs` (when server is running)
+
+---
+
+## 🎯 What's Next?
+
+- ✅ Binary, Multiclass, and Anomaly Detection
+- ✅ REST API with FastAPI
+- ✅ React Frontend
+- ✅ Real-time PCAP/CSV Processing
+- 🔄 Online Learning (planned)
+- 🔄 Real-time Streaming (planned)
+
+---
+
+## 🙏 Acknowledgments
+
+This project builds upon the work of many open-source contributors and research institutions:
+
+### Datasets & Research
+- **[CICIDS 2017 Dataset](https://www.unb.ca/cic/datasets/ids-2017.html)** - Canadian Institute for Cybersecurity for providing comprehensive network traffic datasets
+- Research community for advancing network security and intrusion detection methodologies
+
+### Libraries & Frameworks
+- **[XGBoost](https://xgboost.ai/)** - Gradient boosting framework for high-performance classification
+- **[TensorFlow/Keras](https://www.tensorflow.org/)** - Deep learning framework for autoencoder implementation
+- **[FastAPI](https://fastapi.tiangolo.com/)** - Modern, fast web framework for building APIs
+- **[Scapy](https://scapy.net/)** - Powerful packet manipulation library
+- **[CICFlowMeter](https://github.com/hieulw/cicflowmeter)** - Python-based network flow feature extraction
+- **[React](https://reactjs.org/)** - UI library for building interactive frontends
+- **[shadcn-ui](https://ui.shadcn.com/)** - Beautiful and accessible component library
+- **[Scikit-learn](https://scikit-learn.org/)** - Machine learning utilities and preprocessing tools
+
+### Tools & Infrastructure
+- **[Vite](https://vitejs.dev/)** - Next-generation frontend build tool
+- **[TypeScript](https://www.typescriptlang.org/)** - Type-safe JavaScript
+- **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
+
+---
+
+**Built with ❤️ using Python, XGBoost, TensorFlow, FastAPI, and React**

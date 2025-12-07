@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Privacy-Preserving Intrusion Detection System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #ffffff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #0f4c75 0%, #3282b8 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-top: 10px;
+        }
+
+        .section {
+            padding: 50px 40px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section:last-child {
+            border-bottom: none;
+        }
+
+        .section h2 {
+            color: #0f4c75;
+            font-size: 2em;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #3282b8;
+        }
+
+        .section h3 {
+            color: #3282b8;
+            font-size: 1.5em;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .section h4 {
+            color: #555;
+            font-size: 1.2em;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .problem-solution {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .problem-box, .solution-box {
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .problem-box {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+        }
+
+        .solution-box {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .metric-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .metric-card .label {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        table th {
+            background: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        table tr:hover {
+            background: #f5f5f5;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 10px 0;
+        }
+
+        .image-container .caption {
+            margin-top: 15px;
+            font-style: italic;
+            color: #666;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .image-grid-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .image-grid-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #f8f8f2;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #e17055;
+            margin: 25px 0;
+        }
+
+        .comparison-table {
+            margin: 30px 0;
+        }
+
+        .winner-badge {
+            background: #27ae60;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: inline-block;
+            margin-left: 10px;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .tech-badge {
+            background: linear-gradient(135deg, #3282b8 0%, #0f4c75 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .demo-flow {
+            background: #e8f5e9;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .demo-step {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+        }
+
+        .demo-step .icon {
+            font-size: 2em;
+            margin-right: 20px;
+        }
+
+        .pipeline-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .pipeline-arrow-item {
+            flex: 1;
+            min-width: 200px;
+            padding: 20px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid #3282b8;
+            position: relative;
+        }
+
+        .pipeline-arrow-item::after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2em;
+            color: #3282b8;
+        }
+
+        .pipeline-arrow-item:last-child::after {
+            display: none;
+        }
+
+        .preprocessing-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .preprocessing-steps-5x2 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .preprocessing-steps-5x1 {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .image-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .image-row-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+
+        .image-row-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+        }
+
+        .image-row-item img[style*="height"] {
+            width: 100%;
+        }
+
+        .image-row-2x2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .preprocessing-step {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #3282b8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .preprocessing-step h4 {
+            color: #0f4c75;
+            margin-bottom: 10px;
+        }
+
+        .video-container {
+            text-align: center;
+            margin: 30px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 2px dashed #3282b8;
+        }
+
+        .video-container iframe {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .video-placeholder {
+            padding: 60px;
+            background: #e3f2fd;
+            border-radius: 8px;
+            color: #3282b8;
+            font-size: 1.2em;
+        }
+
+        ul, ol {
+            margin-left: 30px;
+            margin-top: 15px;
+        }
+
+        li {
+            margin: 8px 0;
+        }
+
+        .footer {
+            background: #0f4c75;
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .problem-solution {
+                grid-template-columns: 1fr;
+            }
+
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .pipeline-arrow {
+                flex-direction: column;
+            }
+
+            .pipeline-arrow-item::after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: -25px;
+                transform: translateX(50%);
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .section {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ AI-Powered Privacy-Preserving Intrusion Detection System</h1>
+            <p class="subtitle">Detecting Network Attacks Without Decrypting Traffic</p>
+        </header>
+
+        <!-- Section 1: Introduction & Motivation -->
+        <section class="section" id="introduction">
+            <h2>1. Introduction & Motivation</h2>
+            
+            <div class="problem-solution">
+                <div class="problem-box">
+                    <h3>❌ The Problem</h3>
+                    <ul>
+                        <li><strong>90%+ of web traffic is encrypted</strong> (HTTPS), rendering traditional Deep Packet Inspection (DPI) useless</li>
+                        <li>Traditional firewalls rely on <strong>"Signatures"</strong> (databases of known bad IPs), making them blind to <strong>Zero-Day attacks</strong> (new, unknown threats)</li>
+                        <li>Signature-based systems cannot detect novel attack patterns</li>
+                    </ul>
+                </div>
+                
+                <div class="solution-box">
+                    <h3>✅ Our Solution</h3>
+                    <ul>
+                        <li><strong>Flow-Based Analysis:</strong> We analyze metadata (packet size, timing, flags), not encrypted content</li>
+                        <li><strong>AI-Powered:</strong> Machine Learning detects complex patterns human rules miss</li>
+                        <li><strong>Privacy-Preserving:</strong> No user data is ever decrypted</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="value">99.9%</div>
+                    <div class="label">Binary Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">97%+</div>
+                    <div class="label">Multiclass Accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="value">Real-time</div>
+                    <div class="label">Inference via API</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Dataset -->
+        <section class="section" id="dataset">
+            <h2>2. The Dataset (CICIDS2017)</h2>
+            
+            <div class="highlight-box">
+                <h3>📊 Dataset Overview</h3>
+                <ul>
+                    <li><strong>Source:</strong> CICIDS2017 (Canadian Institute for Cybersecurity)</li>
+                    <li><strong>Scale:</strong> ~2.8 Million Network Flows</li>
+                    <li><strong>Classes:</strong> 15 Total (1 Benign + 14 Attack Types)</li>
+                    <li><strong>Features:</strong> 80+ statistical features (e.g., Flow Duration, Total Fwd Packets, Fwd Packet Length Max)</li>
+                    <li><strong>Processed:</strong> Reduced to 20 Principal Components (PCA) for efficiency, plus K-Means Cluster IDs</li>
+                </ul>
+            </div>
+
+            <h3>🔍 Feature-to-Attack Detection Matrix</h3>
+            <p>How we detect different attack types using network flow patterns:</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Attack Type</th>
+                        <th>Network Pattern</th>
+                        <th>Critical Features</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>DoS / DDoS</strong></td>
+                        <td>"Flooding the server"</td>
+                        <td>High Packet Rate (Flow Packets/s), Small Inter-Arrival Time (Flow IAT), High Congestion Flags (CWE/ECE Flag)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Heartbleed</strong></td>
+                        <td>"Leaking memory"</td>
+                        <td>Asymmetry: Small request packet → Huge response packet. High Bwd Packet Length Max</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Botnet (ARES)</strong></td>
+                        <td>"Robotic consistency"</td>
+                        <td>Low Variance: Flow IAT Std is very low (machine-like periodic beacons), distinct Packet Length Mean</td>
+                    </tr>
+                    <tr>
+                        <td><strong>PortScan</strong></td>
+                        <td>"Knocking on doors"</td>
+                        <td>Short & Tiny: Thousands of flows with Total Packets = 2-3, SYN Flag = 1, very short Flow Duration</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Web Attacks (XSS/SQLi)</strong></td>
+                        <td>"Injection payloads"</td>
+                        <td>Large Payloads: Fwd Packet Length Max is higher than normal web requests (due to long SQL strings or scripts)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Infiltration</strong></td>
+                        <td>"Data theft"</td>
+                        <td>Upload Heavy: Subflow Fwd Bytes (Data leaving network) > Subflow Bwd Bytes (Data entering)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Section 3: Phase 1 - Data Preprocessing -->
+        <section class="section" id="preprocessing-phase1">
+            <h2>3. Phase 1 - Data Preprocessing</h2>
+            
+            <p>Before model selection, comprehensive preprocessing was performed on both binary and multiclass datasets to ensure optimal model performance.</p>
+
+            <h3>3.1 Binary Classification Preprocessing</h3>
+            <div class="preprocessing-steps-5x2">
+                <div class="preprocessing-step">
+                    <h4>1. Data Loading</h4>
+                    <p>Load CSV files from TrafficLabelling folder, combine into single dataset (~2.8M flows)</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>2. Data Cleaning</h4>
+                    <p>Remove non-numeric columns, handle infinite values, drop NaN and duplicates</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>3. Label Generation</h4>
+                    <p>Create Binary_Label (0=Benign, 1=Attack) using LabelEncoder</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>4. Benign Reduction</h4>
+                    <p>Downsample benign traffic to 1.2x attack samples to prevent bias</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>5. Feature Selection</h4>
+                    <p>Extract 77 numeric features, remove metadata columns (IPs, ports, timestamps)</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>6. Standard Scaling</h4>
+                    <p>Apply Z-score normalization using StandardScaler (mean=0, std=1)</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>7. Random Oversampling</h4>
+                    <p>Balance classes using RandomOverSampler to prevent model bias toward majority class</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>8. K-Means Clustering</h4>
+                    <p>Add cluster labels (6 clusters) as additional feature to separate hard-to-distinguish attacks</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>9. PCA Dimensionality Reduction</h4>
+                    <p>Reduce 78 features (77 + cluster) to 20 principal components, preserving 95%+ variance</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>10. Train/Test Split</h4>
+                    <p>80/20 stratified split ensuring balanced distribution across sets</p>
+                </div>
+            </div>
+
+            <div class="image-row">
+                <div class="image-row-item">
+                    <img src="final_preprocessed_data/stats_visualizations/binary_class_dist.png" alt="Binary Class Distribution" style="height: 300px; object-fit: contain;">
+                    <div class="caption">Figure 1: Balanced Binary Class Distribution (After Oversampling)</div>
+                </div>
+                <div class="image-row-item">
+                    <img src="final_preprocessed_data/stats_visualizations/multiclass_class_dist.png" alt="Multiclass Class Distribution" style="height: 300px; object-fit: contain;">
+                    <div class="caption">Figure 2: Multiclass Class Distribution (After Capping at 60k per class)</div>
+                </div>
+            </div>
+
+            <h3>3.2 Multiclass Classification Preprocessing</h3>
+            <div class="preprocessing-steps-5x1">
+                <div class="preprocessing-step">
+                    <h4>1-6. Same as Binary</h4>
+                    <p>Data loading, cleaning, label generation, benign reduction, feature selection, scaling</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>7. Class Capping</h4>
+                    <p>Cap each class at 60,000 samples (NO oversampling) to maintain natural distribution</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>8. K-Means Clustering</h4>
+                    <p>Add cluster labels (10 clusters) optimized for multiclass separation</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>9. PCA Dimensionality Reduction</h4>
+                    <p>Reduce to 20 principal components using separate PCA model for multiclass</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>10. Train/Test Split</h4>
+                    <p>80/20 stratified split maintaining class proportions</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Phase 1 - Model Selection -->
+        <section class="section" id="phase1">
+            <h2>4. Phase 1 - Model Selection (The Experiments)</h2>
+            
+            <p>Before training on the full 2.8M dataset, we ran competitive experiments on balanced subsets (10k Binary, 20k Multiclass) to select the best algorithms.</p>
+
+            <h3>4.1 Binary Classification (Good vs. Bad)</h3>
+            <p>We compared four algorithms on 10,000 balanced samples:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                        <th>Why</th>
+                        <th>Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Decision Tree</td>
+                        <td>98.9%</td>
+                        <td>Fast training, interpretable rules, but prone to overfitting on complex patterns</td>
+                        <td>Good, interpretable, but prone to overfitting</td>
+                    </tr>
+                    <tr>
+                        <td>SVM (RBF)</td>
+                        <td>93.0%</td>
+                        <td>Struggles with high-dimensional data, computationally expensive, slow inference</td>
+                        <td>Failed. Struggled with high-dimensional complexity; too slow</td>
+                    </tr>
+                    <tr>
+                        <td>Random Forest</td>
+                        <td>99.4%</td>
+                        <td>Ensemble of trees reduces overfitting, robust to outliers, good generalization</td>
+                        <td>Excellent stability</td>
+                    </tr>
+                    <tr>
+                        <td><strong>XGBoost</strong> <span class="winner-badge">WINNER</span></td>
+                        <td><strong>99.7%</strong></td>
+                        <td>Gradient boosting handles non-linear relationships, fast training, best accuracy on tabular data</td>
+                        <td><strong>Best accuracy, speed, and handling of non-linear traffic patterns</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Binary Model Performance Matrices</h3>
+            <div class="image-row-2x2">
+                <div class="image-grid-item">
+                    <img src="preprocessed_binary_10k/plots_model/decision_tree.png" alt="Decision Tree Performance Metrics">
+                    <div class="caption">Decision Tree Performance Metrics</div>
+                </div>
+                <div class="image-grid-item">
+                    <img src="preprocessed_binary_10k/plots_model/random_forest.png" alt="Random Forest Performance Metrics">
+                    <div class="caption">Random Forest Performance Metrics</div>
+                </div>
+                <div class="image-grid-item">
+                    <img src="preprocessed_binary_10k/plots_model/svm.png" alt="SVM Performance Metrics">
+                    <div class="caption">SVM (RBF) Performance Metrics</div>
+                </div>
+                <div class="image-grid-item">
+                    <img src="preprocessed_binary_10k/plots_model/xgboost.png" alt="XGBoost Performance Metrics">
+                    <div class="caption">XGBoost Performance Metrics</div>
+                </div>
+            </div>
+
+
+            <h3>4.2 Multiclass Classification (Specific Attack Types)</h3>
+            <p>We compared Tree-based models vs. Deep Learning (TabNet) on 20,000 samples:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Accuracy</th>
+                        <th>Why</th>
+                        <th>Verdict</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TabNet (Deep Learning)</td>
+                        <td>~88.5%</td>
+                        <td>Complex architecture designed for tabular data, but underperformed on network flow features, slower training</td>
+                        <td>Underperformed. Complex to train, lower accuracy on structured data</td>
+                    </tr>
+                    <tr>
+                        <td>Random Forest</td>
+                        <td>~96.8%</td>
+                        <td>Ensemble method provides good generalization, but struggles to distinguish similar DoS attack variants</td>
+                        <td>Strong, but confused similar DoS attacks (Hulk vs GoldenEye)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>XGBoost</strong> <span class="winner-badge">WINNER</span></td>
+                        <td><strong>~97.5%</strong></td>
+                        <td>Gradient boosting excels at learning complex feature interactions, best at separating similar attack classes</td>
+                        <td><strong>Best separation of similar attack classes</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Multiclass Model Performance Matrices</h3>
+            <div class="image-row" style="grid-template-columns: repeat(3, 1fr);">
+                <div class="image-row-item">
+                    <img src="preprocessed_multiclass_20k/plots_model/xgboost_multiclass_results/performance_metrics.png" alt="XGBoost Multiclass Performance" style="height: 300px; object-fit: contain;">
+                    <div class="caption">XGBoost Performance Metrics</div>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #555; text-align: left;">XGBoost achieved the highest accuracy (97.5%) among all multiclass models, demonstrating superior capability in distinguishing between similar attack types such as DoS variants. The gradient boosting approach effectively captures complex feature interactions that are critical for accurate attack classification.</p>
+                </div>
+                <div class="image-row-item">
+                    <img src="preprocessed_multiclass_20k/plots_model/random_forest_multiclass_results/performance_metrics.png" alt="Random Forest Multiclass Performance" style="height: 300px; object-fit: contain;">
+                    <div class="caption">Random Forest Performance Metrics</div>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #555; text-align: left;">Random Forest achieved strong performance (96.8%) with good generalization capabilities. However, it showed some confusion between similar DoS attack variants (Hulk vs GoldenEye), indicating that ensemble averaging alone may not capture the fine-grained differences needed for precise attack type identification.</p>
+                </div>
+                <div class="image-row-item">
+                    <img src="preprocessed_multiclass_20k/plots_model/tabnet_multiclass_results/performance_metrics.png" alt="TabNet Multiclass Performance" style="height: 300px; object-fit: contain;">
+                    <div class="caption">TabNet Performance Metrics</div>
+                    <p style="margin-top: 10px; font-size: 0.9em; color: #555; text-align: left;">TabNet, despite being a sophisticated deep learning architecture designed for tabular data, underperformed with 88.5% accuracy. The complex neural network architecture struggled to learn meaningful patterns from network flow features, suggesting that tree-based methods are more suitable for this structured network traffic data.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Phase 2 - Final System Architecture -->
+        <section class="section" id="architecture">
+            <h2>5. Phase 2 - Final System Architecture</h2>
+            
+            <h3>🔄 System Pipeline</h3>
+            
+            <div class="image-container">
+                <img src="image.png" alt="System Pipeline Diagram" style="max-width: 800px;">
+                <div class="caption">Figure 4: Complete System Pipeline - From PCAP Input to Attack Classification</div>
+            </div>
+
+            <h3>🎯 The 3-Stage Inference Logic</h3>
+
+            <div class="highlight-box">
+                <h4>Stage 1: Gatekeeper (Binary XGBoost)</h4>
+                <p><strong>Question:</strong> Is this traffic Benign or Malicious?</p>
+                <p><strong>Result:</strong> If Benign → Check Anomaly. If Attack → Go to Stage 2.</p>
+                <p><strong>Performance:</strong> Accuracy ~99.9%, AUC 1.00</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Stage 2: Diagnostician (Multiclass XGBoost)</h4>
+                <p><strong>Question:</strong> What specific attack is this?</p>
+                <p><strong>Result:</strong> Returns "DDoS", "Botnet", etc. (Only if Confidence > 60%)</p>
+                <p><strong>Capabilities:</strong> Detects 14 classes (Bot, DDoS, GoldenEye, Hulk, Slowloris, FTP-Patator, Heartbleed, etc.)</p>
+                <p><strong>Performance:</strong> Accuracy ~97.5%, Micro-Averaged AUC: Near 1.0</p>
+            </div>
+
+            <div class="highlight-box">
+                <h4>Stage 3: Safety Net (Autoencoder Anomaly Detector)</h4>
+                <p><strong>Question:</strong> Does this match "Normal" traffic patterns?</p>
+                <p><strong>Mechanism:</strong> A Neural Network trains to reconstruct normal traffic. If Reconstruction Error (MSE) is high, it's an ANOMALY.</p>
+                <p><strong>Why:</strong> Catches Zero-Day attacks the XGBoost models haven't seen before</p>
+                <p><strong>Training Strategy:</strong> Trained ONLY on Normal (Benign) traffic</p>
+            </div>
+        </section>
+
+        <!-- Section 6: Data Engineering & Preprocessing -->
+        <section class="section" id="preprocessing">
+            <h2>6. Data Engineering & Preprocessing</h2>
+            
+            <p>Comprehensive preprocessing pipeline implemented in <code>final_data_preprocess.py</code> to handle the complex CICIDS2017 dataset:</p>
+
+            <h3>📋 Key Techniques</h3>
+            
+            <div class="preprocessing-steps">
+                <div class="preprocessing-step">
+                    <h4>1. Dataset Loading & Cleaning</h4>
+                    <p>Load all CSV files from TrafficLabelling folder, combine into single DataFrame. Remove non-numeric columns (Flow ID, IPs, timestamps, ports, protocol). Handle infinite values, drop NaN and duplicates. Final dataset: ~2.8M flows with 77 numeric features.</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>2. Label Generation</h4>
+                    <p>Create Binary_Label (0=Benign, 1=Attack) and Multiclass_Label using LabelEncoder for 14 attack types. Save label encoder for inference consistency.</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>3. Benign Reduction</h4>
+                    <p>Downsample benign traffic to 1.2x attack samples (target_benign = len(attack_df) * 1.2) to prevent model bias while maintaining sufficient normal samples for training.</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>4. Standard Scaling</h4>
+                    <p>Apply Z-score normalization using StandardScaler. Fit on training DataFrame to preserve feature_names_in_ attribute. Transform all features to mean=0, std=1. Save scaler.pkl and feature_names.pkl for inference.</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>5. Class Balancing</h4>
+                    <p><strong>Binary:</strong> RandomOverSampler to balance classes. <strong>Multiclass:</strong> Cap each class at 60,000 samples (no oversampling) to maintain natural distribution. <strong>Anomaly:</strong> Extract only benign samples, sample down to 80,000 if larger.</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>6. K-Means Clustering</h4>
+                    <p>Add cluster labels as additional features: 6 clusters for binary, 10 clusters for multiclass. Helps separate hard-to-distinguish attacks. Save kmeans_bin.pkl and kmeans_multi.pkl models.</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>7. PCA Dimensionality Reduction</h4>
+                    <p>Reduce features to 20 principal components: 77 numeric + 1 cluster = 78 features → 20 PCs. Preserves 95%+ variance, reduces overfitting, speeds up training. Separate PCA models for binary (pca_bin.pkl) and multiclass (pca_multi.pkl).</p>
+                </div>
+                <div class="preprocessing-step">
+                    <h4>8. Train/Test Split</h4>
+                    <p>80/20 stratified split ensuring balanced class distribution across train and test sets. Save as CSV files: binary_train.csv, binary_test.csv, multiclass_train.csv, multiclass_test.csv, anomaly_train.csv, anomaly_test.csv.</p>
+                </div>
+            </div>
+
+            <div class="image-row">
+                <div class="image-row-item">
+                    <img src="final_preprocessed_data/pca_visualizations/viz_pca_scatter_binary.png" alt="PCA Scatter Binary">
+                    <div class="caption">Figure 5: PCA Scatter Plot (Binary) - Shows separation between Benign and Attack traffic</div>
+                </div>
+                <div class="image-row-item">
+                    <img src="final_preprocessed_data/pca_visualizations/viz_pca_scatter_multiclass.png" alt="PCA Scatter Multiclass">
+                    <div class="caption">Figure 6: PCA Scatter Plot (Multiclass) - Shows that attacks form distinct clusters in 2D space, proving they are separable</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 7: Model Details -->
+        <section class="section" id="models">
+            <h2>7. Model Details</h2>
+
+            <h3>7.1 Binary Classification (The Gatekeeper)</h3>
+            <div class="highlight-box">
+                <p><strong>Algorithm:</strong> XGBoost Classifier | <strong>Accuracy: 99.9%</strong> | <strong>AUC: 1.00</strong></p>
+                <p><strong>Configuration:</strong> 250 trees, depth 8, learning rate 0.08, 80% subsampling</p>
+                <p><strong>Key Insight:</strong> Packet Length Std and Flow IAT are top predictors of attacks.</p>
+            </div>
+
+            <h3>7.2 Multiclass Classification (The Diagnostician)</h3>
+            <div class="highlight-box">
+                <p><strong>Algorithm:</strong> XGBoost Classifier (multiclass) | <strong>Accuracy: 97.5%</strong> | <strong>Micro-AUC: Near 1.0</strong></p>
+                <p><strong>Configuration:</strong> 300 trees, depth 10, learning rate 0.08 | <strong>14 Attack Classes:</strong> Bot, DDoS, DoS variants, FTP/SSH-Patator, Heartbleed, Infiltration, PortScan, Web Attacks</p>
+                <p><strong>Detection Patterns:</strong> DDoS (high packet rates), Heartbleed (small request → huge response), Botnet (periodic timing), PortScan (short flows with SYN flags)</p>
+            </div>
+
+            <h3>7.3 Anomaly Detection (The Safety Net)</h3>
+            <div class="highlight-box">
+                <p><strong>Model:</strong> Deep Autoencoder (Neural Network) | <strong>Training:</strong> Only on normal traffic (80k samples)</p>
+                <p><strong>Architecture:</strong> Input 20 → Encoder (32→16→10) → Decoder (16→32→20) | <strong>Loss:</strong> MSE | <strong>Threshold:</strong> mean + 3×std</p>
+                <p><strong>Purpose:</strong> Detects zero-day attacks and novel threats by learning normal patterns and flagging high reconstruction errors.</p>
+            </div>
+
+            <h3>Model Performance Curves</h3>
+            <div class="image-grid">
+                <div class="image-grid-item">
+                    <img src="final_preprocessed_data/plot_models/binary/xgb_roc_curve.png" alt="Binary ROC Curve">
+                    <div class="caption">Binary XGBoost ROC Curve</div>
+                </div>
+                <div class="image-grid-item">
+                    <img src="final_preprocessed_data/plot_models/multiclass_xgb/xgb_multiclass_roc_micro.png" alt="Multiclass ROC Curve">
+                    <div class="caption">Multiclass XGBoost ROC Curve</div>
+                </div>
+                <div class="image-grid-item">
+                    <img src="final_preprocessed_data/plot_models/anomaly/autoencoder_loss_curve.png" alt="Autoencoder Loss Curve">
+                    <div class="caption">Autoencoder Training Loss Curve</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 8: Implementation & Tech Stack -->
+        <section class="section" id="implementation">
+            <h2>8. Implementation & Tech Stack</h2>
+            
+            <h3>🛠️ Technology Stack</h3>
+            <div class="tech-stack">
+                <span class="tech-badge">Python</span>
+                <span class="tech-badge">FastAPI</span>
+                <span class="tech-badge">XGBoost</span>
+                <span class="tech-badge">TensorFlow/Keras</span>
+                <span class="tech-badge">Scikit-Learn</span>
+                <span class="tech-badge">Scapy</span>
+                <span class="tech-badge">CICFlowMeter</span>
+                <span class="tech-badge">ONNX</span>
+            </div>
+
+            <h3>🖥️ Live Dashboard</h3>
+            <div class="video-container">
+                <div class="video-placeholder">
+                    📊 Add Live Dashboard Screenshot or Link Here<br>
+                    <small style="color: #666;">Replace this placeholder with a screenshot of the live dashboard or a link to the demo</small>
+                </div>
+            </div>
+
+            <h3>⚡ Optimization</h3>
+            <p>Models converted to ONNX (<code>export_to_onnx.py</code>) for faster inference. The live pipeline currently uses pickle/h5 for simplicity, but ONNX support demonstrates optimization skills.</p>
+        </section>
+
+        <!-- Section 9: Live Demo -->
+        <section class="section" id="demo">
+            <h2>9. Live Demo & Usage</h2>
+            
+            <h3>🎬 Demo Video / Screenshot</h3>
+            <div class="video-container">
+                <div class="video-placeholder">
+                    📹 Add Demo Video Link or Screenshot Here<br>
+                    <small style="color: #666;">Replace this placeholder with an iframe for video or img tag for screenshot</small>
+                </div>
+            </div>
+            
+
+            <h3>📡 API Endpoints</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Endpoint</th>
+                        <th>Method</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/predict</code></td>
+                        <td>POST</td>
+                        <td>Main inference endpoint - accepts PCAP/CSV files</td>
+                    </tr>
+                    <tr>
+                        <td><code>/download/{filename}</code></td>
+                        <td>GET</td>
+                        <td>Download prediction CSV</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>💻 Example API Usage</h3>
+            <div class="code-block">
+curl -X POST "http://localhost:8000/predict" \
+     -H "accept: application/json" \
+     -H "Content-Type: multipart/form-data" \
+     -F "file=@network_traffic.pcap"
+            </div>
+        </section>
+
+        <!-- Section 10: Conclusion -->
+        <section class="section" id="conclusion">
+            <h2>10. Conclusion</h2>
+            
+            <div class="highlight-box">
+                <h3>🎯 Key Achievements</h3>
+                <ul>
+                    <li><strong>Performance:</strong> Achieved 99.9% Binary Accuracy and 97%+ Multiclass Accuracy on CICIDS2017</li>
+                    <li><strong>Innovation:</strong> Successfully combined Supervised Learning (XGBoost) for known threats with Unsupervised Learning (Autoencoder) for unknown threats</li>
+                    <li><strong>Impact:</strong> A privacy-preserving, encryption-agnostic IDS ready for deployment</li>
+                </ul>
+            </div>
+
+            <h3>🔮 Future Enhancements</h3>
+            <ul>
+                <li>Online Learning: Incremental model updates from new data</li>
+                <li>Deep Learning: LSTM/CNN for temporal pattern detection</li>
+                <li>Real-Time Streaming: Process network traffic in real-time</li>
+                <li>Dashboard: Enhanced Web UI for visualization and monitoring</li>
+                <li>Alerting System: Integration with SIEM systems</li>
+            </ul>
+        </section>
+
+        <footer class="footer">
+            <p><strong>AI-Powered Privacy-Preserving Intrusion Detection System</strong></p>
+            <p>Built with ❤️ using Python, XGBoost, TensorFlow, and FastAPI</p>
+            <p style="margin-top: 20px; opacity: 0.8;">© 2024 - All Rights Reserved</p>
+        </footer>
+    </div>
+</body>
+</html>
