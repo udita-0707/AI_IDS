@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 47% 5%;
+    --foreground: 180 100% 95%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 180 100% 95%;
+
+    --popover: 222 47% 8%;
+    --popover-foreground: 180 100% 95%;
+
+    --primary: 180 100% 50%;
+    --primary-foreground: 222 47% 5%;
+
+    --secondary: 222 30% 15%;
+    --secondary-foreground: 180 100% 90%;
+
+    --muted: 222 30% 12%;
+    --muted-foreground: 180 20% 60%;
+
+    --accent: 280 100% 60%;
+    --accent-foreground: 180 100% 95%;
+
+    --destructive: 0 90% 55%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 50% 20%;
+    --input: 222 30% 15%;
+    --ring: 180 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom status colors */
+    --status-benign: 145 80% 45%;
+    --status-benign-glow: 145 100% 50%;
+    --status-anomaly: 45 100% 50%;
+    --status-anomaly-glow: 45 100% 60%;
+    --status-attack: 0 100% 55%;
+    --status-attack-glow: 0 100% 65%;
+
+    /* Neon glow effects */
+    --glow-cyan: 0 0 20px hsl(180 100% 50% / 0.5), 0 0 40px hsl(180 100% 50% / 0.3);
+    --glow-green: 0 0 20px hsl(145 100% 50% / 0.5), 0 0 40px hsl(145 100% 50% / 0.3);
+    --glow-yellow: 0 0 20px hsl(45 100% 50% / 0.5), 0 0 40px hsl(45 100% 50% / 0.3);
+    --glow-red: 0 0 20px hsl(0 100% 55% / 0.5), 0 0 40px hsl(0 100% 55% / 0.3);
+
+    --sidebar-background: 222 47% 5%;
+    --sidebar-foreground: 180 100% 95%;
+    --sidebar-primary: 180 100% 50%;
+    --sidebar-primary-foreground: 222 47% 5%;
+    --sidebar-accent: 222 30% 15%;
+    --sidebar-accent-foreground: 180 100% 90%;
+    --sidebar-border: 180 50% 20%;
+    --sidebar-ring: 180 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono antialiased;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glow-cyan {
+    box-shadow: var(--glow-cyan);
+  }
+
+  .glow-green {
+    box-shadow: var(--glow-green);
+  }
+
+  .glow-yellow {
+    box-shadow: var(--glow-yellow);
+  }
+
+  .glow-red {
+    box-shadow: var(--glow-red);
+  }
+
+  .text-glow-cyan {
+    text-shadow: 0 0 10px hsl(180 100% 50% / 0.8), 0 0 20px hsl(180 100% 50% / 0.5);
+  }
+
+  .text-glow-green {
+    text-shadow: 0 0 10px hsl(145 100% 50% / 0.8), 0 0 20px hsl(145 100% 50% / 0.5);
+  }
+
+  .text-glow-yellow {
+    text-shadow: 0 0 10px hsl(45 100% 50% / 0.8), 0 0 20px hsl(45 100% 50% / 0.5);
+  }
+
+  .text-glow-red {
+    text-shadow: 0 0 10px hsl(0 100% 55% / 0.8), 0 0 20px hsl(0 100% 55% / 0.5);
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsl(180 100% 50% / 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(180 100% 50% / 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .scan-line {
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      hsl(180 100% 50% / 0.1) 50%,
+      transparent 100%
+    );
+    animation: scan 3s linear infinite;
+  }
+
+  .border-glow-cyan {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 15px hsl(180 100% 50% / 0.3), inset 0 0 15px hsl(180 100% 50% / 0.1);
+  }
+
+  .border-glow-green {
+    border-color: hsl(var(--status-benign));
+    box-shadow: 0 0 15px hsl(145 100% 50% / 0.3), inset 0 0 15px hsl(145 100% 50% / 0.1);
+  }
+
+  .border-glow-yellow {
+    border-color: hsl(var(--status-anomaly));
+    box-shadow: 0 0 15px hsl(45 100% 50% / 0.3), inset 0 0 15px hsl(45 100% 50% / 0.1);
+  }
+
+  .border-glow-red {
+    border-color: hsl(var(--status-attack));
+    box-shadow: 0 0 15px hsl(0 100% 55% / 0.3), inset 0 0 15px hsl(0 100% 55% / 0.1);
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes border-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px hsl(0 100% 55% / 0.5), inset 0 0 15px hsl(0 100% 55% / 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px hsl(0 100% 55% / 0.8), inset 0 0 30px hsl(0 100% 55% / 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-border-pulse {
+  animation: border-pulse 1.5s ease-in-out infinite;
+}

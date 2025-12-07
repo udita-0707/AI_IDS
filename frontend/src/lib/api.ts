@@ -1,0 +1,87 @@
+/**
+ * API service for connecting to the AI_IDS backend
+ */
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
+
+export interface ApiHealthResponse {
+  status: string;
+  timestamp: number;
+  models: {
+    binary: string;
+    multiclass: string;
+    anomaly: string;
+  };
+}
+
+export interface FlowData {
+  Label: string;
+  Attack_Type?: string;
+  [key: string]: any; // Allow other flow properties
+}
+
+export interface ApiPredictResponse {
+  status: string;
+  file_type: string;
+  filename: string;
+  file_size_bytes: number;
+  total_flows: number;
+  summary: {
+    BENIGN?: number;
+    ATTACK?: number;
+    ANOMALY?: number;
+  };
+  attack_types?: Record<string, number>;
+  download_csv: string;
+  data_preview: FlowData[];
+  all_flows: FlowData[];
+}
+
+/**
+ * Check API health
+ */
+export async function checkApiHealth(): Promise<ApiHealthResponse> {
+  const response = await fetch(`${API_BASE_URL}/health`);
+  if (!response.ok) {
+    throw new Error('API server is not responding');
+  }
+  return response.json();
+}
+
+/**
+ * Upload a file and get predictions
+ */
+export async function predictFile(file: File): Promise<ApiPredictResponse> {
+  const formData = new FormData();
+  formData.append('file', file);
+
+  const response = await fetch(`${API_BASE_URL}/predict`, {
+    method: 'POST',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({ detail: 'Upload failed' }));
+    throw new Error(error.detail || `HTTP ${response.status}: ${response.statusText}`);
+  }
+
+  return response.json();
+}
+
+/**
+ * Download a CSV file
+ */
+export function getDownloadUrl(filename: string): string {
+  return `${API_BASE_URL}/download/${filename}`;
+}
+
+/**
+ * Download a CSV file as a blob
+ */
+export async function downloadCsv(filename: string): Promise<Blob> {
+  const response = await fetch(getDownloadUrl(filename));
+  if (!response.ok) {
+    throw new Error('Failed to download CSV file');
+  }
+  return response.blob();
+}

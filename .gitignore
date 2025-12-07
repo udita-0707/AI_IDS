@@ -29,3 +29,9 @@ __pycache__/
 .idea/
 
 
+live/
+*.csv
+!DDOS_sample_500.csv
+node_modules/
+frontend/node_modules/
+frontend/dist/

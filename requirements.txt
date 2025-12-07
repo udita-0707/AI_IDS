@@ -1,29 +1,51 @@
-# Core Data Science Libraries
-pandas==2.2.0
-numpy==1.26.3
+# ---------------------------------------------------
+# Core Dependencies
+# ---------------------------------------------------
+# Note: numpy<2.0.0 required for matplotlib compatibility
+# ml-dtypes may show a warning but won't break functionality
+numpy>=1.26.0,<2.0.0
+pandas>=2.2.0
+scikit-learn>=1.5.0  # 1.5.0+ has better Python 3.13 support
 
+# ---------------------------------------------------
 # Visualization
-matplotlib==3.8.2
-seaborn==0.13.1
+# ---------------------------------------------------
+matplotlib>=3.8.0
+seaborn>=0.13.0
 
+# ---------------------------------------------------
 # Machine Learning
-scikit-learn==1.4.0
-
-# Gradient Boosting (XGBoost)
+# ---------------------------------------------------
 xgboost==2.0.3
-
-# Utilities
-tqdm==4.66.1
-
-# Oversampling
 imbalanced-learn==0.12.0
 
-# For tabnet 
+# ---------------------------------------------------
+# Deep Learning
+# ---------------------------------------------------
+tensorflow>=2.13.0
+
+# ---------------------------------------------------
+# TabNet (PyTorch)
+# ---------------------------------------------------
 pytorch-tabnet
 
-# For deployment
-# pyshark
-# onnx
-# onnxruntime
-# onnxmltools 
-# hummingbird-ml
+# ---------------------------------------------------
+# Traffic Extraction
+# ---------------------------------------------------
+scapy
+pyshark
+git+https://github.com/hieulw/cicflowmeter.git@master
+
+# ---------------------------------------------------
+# ONNX (for model conversion and inference)
+# ---------------------------------------------------
+onnx>=1.15.0
+onnxruntime>=1.16.0
+onnxmltools>=1.11.0
+
+# ---------------------------------------------------
+# API Server (FastAPI)
+# ---------------------------------------------------
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+python-multipart>=0.0.6  # Required for file uploads
